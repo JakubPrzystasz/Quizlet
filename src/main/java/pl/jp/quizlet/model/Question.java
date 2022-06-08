@@ -1,11 +1,11 @@
-package pl.jp.quizlet.models;
+package pl.jp.quizlet.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -13,6 +13,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class Question {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Question_SEQ")
+    @SequenceGenerator(name = "Question_SEQ")
+    @Column(nullable = false)
     private Long Id;
 
     private String Content;

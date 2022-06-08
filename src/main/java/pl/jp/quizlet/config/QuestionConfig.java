@@ -14,26 +14,29 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-@NoArgsConstructor
-@AllArgsConstructor
 public class QuestionConfig {
     @Autowired
     QuestionRepository questionRepository;
     @Autowired
     AnswerRepository answerRepository;
 
-    void seed() throws IOException {
+    void seed() {
         Question l1 = new Question("Wykład 1", QuestionType.MULTIPLE_ANSWER);
-        Answer ans = new Answer("Tak",true);
+        Answer ans1 = new Answer("Tak",true);
+        Answer ans2 = new Answer("Nie",false);
         questionRepository.save(l1);
-        l1.addAnswer(ans);
-        answerRepository.save(ans);
-//        l1.addAnswer(new Answer("Nie",false));
+        l1.addAnswer(ans1);
+        l1.addAnswer(ans2);
+        answerRepository.save(ans1);
+        answerRepository.save(ans2);
 
-//        Question l2 = new Question(null,"Wykład 2",QuestionType.TRUE_FALSE,null);
-//
-//        Question l3 = new Question(null,"Wykład 3",QuestionType.TEXT_ANSWER,null);
-//
-//        questionRepository.saveAll(List.of(l1, l2, l3));
+        Question l2 = new Question("Wykład 2",QuestionType.TRUE_FALSE);
+        l2.addAnswer(ans1);
+        l2.addAnswer(ans2);
+        Question l3 = new Question("Wykład 3",QuestionType.TEXT_ANSWER);
+        l3.addAnswer(ans1);
+        l3.addAnswer(ans2);
+
+        questionRepository.saveAll(List.of(l1, l2, l3));
     }
 }

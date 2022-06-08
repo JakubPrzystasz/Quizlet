@@ -1,5 +1,6 @@
 package pl.jp.quizlet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
@@ -25,8 +26,8 @@ public class Question {
     @Enumerated(EnumType.ORDINAL)
     private QuestionType type;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Answer> answerList = new ArrayList<>();
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Answer> answerList;
 
     public Question(String content,QuestionType type){
         this.content = content;
@@ -43,5 +44,9 @@ public class Question {
         answerList.remove(answer);
         answer.setQuestion(null);
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Lecture lecture;
 
 }

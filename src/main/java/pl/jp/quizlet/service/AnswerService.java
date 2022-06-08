@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Service
 public class AnswerService {
+
     @Autowired
     private AnswerRepository answerRepository;
 
@@ -24,4 +25,5 @@ public class AnswerService {
     public Optional<Answer> getAnswer(Integer answerId) {
         return answerRepository.findById(Long.valueOf(answerId));
     }
+
 }

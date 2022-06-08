@@ -1,6 +1,8 @@
 package pl.jp.quizlet.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Entity(name = "Answer")
@@ -19,6 +21,7 @@ public class Answer {
     private boolean correct;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Question question;
 
     public Answer(String content, boolean correct){

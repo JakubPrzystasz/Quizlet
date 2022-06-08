@@ -10,7 +10,6 @@ import pl.jp.quizlet.model.Question;
 import pl.jp.quizlet.service.QuestionService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/questions")

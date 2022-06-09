@@ -1,5 +1,6 @@
 package pl.jp.quizlet.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.jp.quizlet.model.Lecture;
@@ -9,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class LectureService {
 
-    @Autowired
-    LectureRepository lectureRepository;
+    private  final LectureRepository lectureRepository;
     public List<Lecture> getAll() {
         return  lectureRepository.findAll();
     }

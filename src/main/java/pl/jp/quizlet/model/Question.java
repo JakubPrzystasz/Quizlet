@@ -26,22 +26,22 @@ public class Question {
     private QuestionType type;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Answer> answerList;
+    private List<Option> optionList;
 
     public Question(String content,QuestionType type){
         this.content = content;
         this.type = type;
-        answerList = new ArrayList<>();
+        optionList = new ArrayList<>();
     }
 
-    public void addAnswer(Answer answer){
-        answerList.add(answer);
-        answer.setQuestion(this);
+    public void addOption(Option option){
+        optionList.add(option);
+        option.setQuestion(this);
     }
 
-    public void removeAnswer(Answer answer){
-        answerList.remove(answer);
-        answer.setQuestion(null);
+    public void removeOption(Option option){
+        optionList.remove(option);
+        option.setQuestion(null);
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

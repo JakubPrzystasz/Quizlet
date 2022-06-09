@@ -7,32 +7,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.jp.quizlet.model.Option;
-import pl.jp.quizlet.model.Question;
-import pl.jp.quizlet.service.QuestionService;
+import pl.jp.quizlet.service.OptionService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/options")
 @RequiredArgsConstructor
-public class QuestionController {
+public class OptionController {
 
-    private final QuestionService questionService;
+    private final OptionService optionService;
 
     @GetMapping()
-    public List<Question> getAllQuestions(){
-        return questionService.getAll();
+    public List<Option> getAllAnswers(){
+        return optionService.getAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody Question question){
-        questionService.saveQuestion(question);
+    public void save(@RequestBody Option option){
+        optionService.saveAnswer(option);
     }
 
-    @GetMapping(value = "/{questionId}")
-    public Question getQuestion(@PathVariable Integer questionId) {
-        return questionService.getQuestion(questionId)
+    @GetMapping(value = "/{optionId}")
+    public Option getOption(@PathVariable Integer optionId) {
+        return optionService.getOption(optionId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not found record with specified id"));
     }
+
 }

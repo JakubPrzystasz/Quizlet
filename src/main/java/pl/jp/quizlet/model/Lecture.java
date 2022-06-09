@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "Lecture")
@@ -24,5 +25,24 @@ public class Lecture {
 
     @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questionList;
+
+    //How many random questions to display
+    private Integer questionsToDisplay;
+
+    public Lecture(String title, String description){
+        this.title = title;
+        this.description = description;
+        questionList = new ArrayList<>();
+    }
+
+    public void addQuestion(Question question){
+        questionList.add(question);
+        question.setLecture(this);
+    }
+
+    public void removeQuestion(Question question){
+        questionList.remove(question);
+        question.setLecture(this);
+    }
 
 }

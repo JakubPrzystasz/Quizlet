@@ -28,6 +28,12 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Option> optionList;
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<QuestionMedia> mediaList;
+
+    @ManyToMany(mappedBy = "assignedQuestions")
+    private List<Session> sessionList;
+
     public Question(String content,QuestionType type){
         this.content = content;
         this.type = type;

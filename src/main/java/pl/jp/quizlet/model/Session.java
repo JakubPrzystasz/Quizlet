@@ -29,6 +29,13 @@ public class Session {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime sessionTimestamp;
 
+    @ManyToMany
+    @JoinTable(
+            name = "session_questions",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "question_id"))
+    private List<Question> assignedQuestions;
+
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answerList;
 

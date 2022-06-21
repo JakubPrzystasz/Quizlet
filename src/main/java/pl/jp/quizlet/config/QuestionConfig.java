@@ -30,7 +30,6 @@ public class QuestionConfig {
         for(int l = 0; l < faker.random().nextInt(1,8); l++){
             var lecture = new Lecture(faker.commerce().productName(),faker.gameOfThrones().quote());
             lectureRepository.save(lecture);
-
             for(int q = 0; q < faker.random().nextInt(16); q++){
                 var question = new Question(faker.book().title(), types.get(faker.random().nextInt(types.size())));
                 lecture.addQuestion(question);

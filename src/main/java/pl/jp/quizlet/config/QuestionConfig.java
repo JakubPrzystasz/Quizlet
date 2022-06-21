@@ -23,9 +23,6 @@ public class QuestionConfig {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    UserRepository userRepository;
-
     void seed() {
         Faker faker = new Faker(new Locale("pl"));
         List<QuestionType> types = List.of(QuestionType.values());

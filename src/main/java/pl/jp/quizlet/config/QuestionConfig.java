@@ -20,6 +20,8 @@ public class QuestionConfig {
     OptionRepository optionRepository;
     @Autowired
     LectureRepository lectureRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     UserRepository userRepository;

@@ -16,9 +16,9 @@ public class UserController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveUser(@RequestParam("login") String login){
+    public User saveUser(@RequestParam("login") String login){
         try{
-            userService.createUser(login);
+            return userService.createUser(login);
         }catch (RuntimeException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

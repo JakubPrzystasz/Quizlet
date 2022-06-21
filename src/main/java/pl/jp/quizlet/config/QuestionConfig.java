@@ -3,13 +3,11 @@ package pl.jp.quizlet.config;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.jp.quizlet.model.Option;
-import pl.jp.quizlet.model.Lecture;
-import pl.jp.quizlet.model.Question;
-import pl.jp.quizlet.model.QuestionType;
+import pl.jp.quizlet.model.*;
 import pl.jp.quizlet.repository.LectureRepository;
 import pl.jp.quizlet.repository.OptionRepository;
 import pl.jp.quizlet.repository.QuestionRepository;
+import pl.jp.quizlet.repository.UserRepository;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,6 +20,9 @@ public class QuestionConfig {
     OptionRepository optionRepository;
     @Autowired
     LectureRepository lectureRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     void seed() {
         Faker faker = new Faker(new Locale("pl"));
@@ -42,5 +43,7 @@ public class QuestionConfig {
                 }
             }
         }
+
+        userRepository.save(new User("j0tp3"));
     }
 }

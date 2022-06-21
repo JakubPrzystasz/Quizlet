@@ -27,9 +27,12 @@ public class UserService {
         return userRepository.findByLogin(login);
     }
 
-    public void createUser(String login) {
-        if(!getUser(login).isPresent())
-            userRepository.save(new User(login));
+    public User createUser(String login) {
+        if(!getUser(login).isPresent()) {
+            var user = new User(login);
+            userRepository.save(user);
+            return user;
+        }
         else
             throw new RuntimeException("User exists!");
     }

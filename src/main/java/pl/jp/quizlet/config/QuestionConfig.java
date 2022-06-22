@@ -19,8 +19,6 @@ public class QuestionConfig {
     LectureRepository lectureRepository;
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    SessionRepository sessionRepository;
 
     void seed() {
         Faker faker = new Faker(new Locale("pl"));
@@ -30,11 +28,9 @@ public class QuestionConfig {
         userRepository.save(user);
 
         for(int l = 0; l < faker.random().nextInt(1,8); l++){
-            var lecture = new Lecture(faker.commerce().productName(),faker.gameOfThrones().quote()){{
-                setQuestionsToDisplay(Long.valueOf(faker.random().nextInt(2,8)));
-            }};
+            var lecture = new Lecture(faker.commerce().productName(),faker.gameOfThrones().quote(),Long.valueOf(faker.random().nextInt(2,6)));
             lectureRepository.save(lecture);
-            for(int q = 0; q < faker.random().nextInt(16); q++){
+            for(int q = 0; q < faker.random().nextInt(6,16); q++){
                 var question = new Question(faker.book().title(), types.get(faker.random().nextInt(types.size())));
                 lecture.addQuestion(question);
                 questionRepository.save(question);

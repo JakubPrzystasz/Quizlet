@@ -1,8 +1,10 @@
 package pl.jp.quizlet.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
 @Entity(name = "Option")
@@ -18,14 +20,19 @@ public class Option {
 
     private String content;
 
-    private boolean correct;
+    private boolean correct = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Question question;
 
-    public Option(String content, boolean correct){
+    public Option(String content, boolean correct) {
         this.content = content;
         this.correct = correct;
+    }
+
+    @JsonIgnore
+    public boolean getIsCorrect() {
+        return correct;
     }
 }

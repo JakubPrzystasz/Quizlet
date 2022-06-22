@@ -29,7 +29,8 @@ public class UserService {
 
     public User createUser(String login) {
         if(!getUser(login).isPresent()) {
-            var user = new User(login);
+            var user = new User();
+            user.setLogin(login);
             userRepository.save(user);
             return user;
         }

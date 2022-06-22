@@ -1,5 +1,6 @@
 package pl.jp.quizlet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,10 @@ public class Lecture {
 
     @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questionList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Session> sessionList;
 
     public Lecture(String title, String description,Long questionsToDisplay){
         this.title = title;

@@ -1,16 +1,16 @@
 package pl.jp.quizlet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "Session")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,9 +25,6 @@ public class Session {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime timestamp;
-
     @ManyToMany
     @JoinTable(
             name = "session_questions",
@@ -38,7 +35,12 @@ public class Session {
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answerList;
 
-    @OneToOne
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private Lecture lecture;
+
+    private Integer result;
+
+    private Integer totalPoints;
 }

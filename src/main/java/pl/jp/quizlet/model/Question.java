@@ -28,9 +28,9 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Option> optionList;
 
-    @ManyToMany(mappedBy = "assignedQuestions")
-    @JsonIgnore
-    private List<Session> sessionList;
+//    @ManyToMany(mappedBy = "assignedQuestions")
+//    @JsonIgnore
+//    private List<Session> sessionList;
 
     public Question(String content,QuestionType type){
         this.content = content;

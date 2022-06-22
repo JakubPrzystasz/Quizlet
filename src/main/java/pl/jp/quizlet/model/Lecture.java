@@ -23,11 +23,11 @@ public class Lecture {
 
     private String description;
 
+    //How many random questions to display
+    private Long questionsToDisplay;
+
     @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questionList;
-
-    //How many random questions to display
-    private Integer questionsToDisplay;
 
     public Lecture(String title, String description){
         this.title = title;

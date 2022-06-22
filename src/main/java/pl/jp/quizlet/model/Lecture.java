@@ -29,9 +29,10 @@ public class Lecture {
     @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questionList;
 
-    public Lecture(String title, String description){
+    public Lecture(String title, String description,Long questionsToDisplay){
         this.title = title;
         this.description = description;
+        this.questionsToDisplay = questionsToDisplay;
         questionList = new ArrayList<>();
     }
 

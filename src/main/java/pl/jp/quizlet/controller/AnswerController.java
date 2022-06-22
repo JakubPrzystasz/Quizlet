@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.jp.quizlet.model.Answer;
-import pl.jp.quizlet.model.Question;
-import pl.jp.quizlet.repository.AnswerRepository;
 import pl.jp.quizlet.service.AnswerService;
 import pl.jp.quizlet.service.OptionService;
 import pl.jp.quizlet.service.SessionService;
@@ -36,11 +34,11 @@ public class AnswerController {
                      @RequestParam("optionId") Integer optionId){
         var session = sessionService.getSession(sessionId);
         var option = optionService.getOption(optionId);
+
         if(session.isPresent() && option.isPresent()){
-            var answer = new Answer(){{
-                setOption(option.get());
-                setSession(session.get());
-            }};
+            var answer = new Answer();
+            answer.setOption(option.get());
+            answer.setSession(session.get());
             answerService.saveAnswer(answer);
             return answer;
         }else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not found record with specified id");
